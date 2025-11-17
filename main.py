@@ -80,6 +80,54 @@ def test_database():
     return status
 
 
+# --------------------- Demo seed on startup ---------------------
+
+DEFAULT_MAP_URL = (
+    "https://images.unsplash.com/photo-1502920917128-1aa500764ce7?w=1600&auto=format&fit=crop&q=80"
+)
+
+
+def seed_demo_content():
+    """Insert a default map and a few demo entries if database is empty."""
+    if db is None:
+        return
+    try:
+        # Seed map if none exists
+        has_map = db["mapasset"].find_one()
+        if not has_map:
+            map_doc = MapAsset(image_url=DEFAULT_MAP_URL, width=None, height=None, version=1)
+            map_id = create_document("mapasset", map_doc)
+            # Seed a sample lore article
+            lore = LoreArticle(
+                title="The Founding of Emberfall",
+                short_description="How the first settlers braved the wilds and built a haven.",
+                main_image_url="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&auto=format&fit=crop&q=80",
+                content_body=(
+                    "<h2>Origins</h2><p>Legend speaks of a caravan of wanderers who discovered a valley aglow with mystic embers. "
+                    "They called it Emberfall. Over time, it became a crossroads for trade, lore, and adventure.</p>"
+                ),
+                category_ids=[],
+                slug="founding-of-emberfall",
+            )
+            lore_id = create_document("lorearticle", lore)
+            # Seed a few POIs
+            demo_pois = [
+                POI(name="Emberfall City", x_coordinate=0.48, y_coordinate=0.52, icon_type="city", lore_article_id=lore_id),
+                POI(name="Whispering Woods", x_coordinate=0.65, y_coordinate=0.40, icon_type="dungeon", lore_article_id=lore_id),
+                POI(name="Sunspire Outpost", x_coordinate=0.30, y_coordinate=0.33, icon_type="quest", lore_article_id=lore_id),
+            ]
+            for poi in demo_pois:
+                create_document("poi", poi)
+    except Exception:
+        # Best effort seeding; failures shouldn't crash server
+        pass
+
+
+@app.on_event("startup")
+def on_startup():
+    seed_demo_content()
+
+
 # --------------------- Public API for Roblox and Website ---------------------
 
 @app.get("/api/pois")

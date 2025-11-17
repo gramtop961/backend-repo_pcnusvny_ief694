@@ -1,11 +1,12 @@
 INFO:     Will watch for changes in these directories: ['/home/workspace']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [267] using StatReload
-INFO:     Started server process [269]
+INFO:     Started reloader process [347] using StatReload
+INFO:     Started server process [349]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     172.20.0.1:41812 - "HEAD / HTTP/1.1" 405 Method Not Allowed
-INFO:     172.20.0.1:41826 - "GET /api/map HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:42656 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:42672 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:42656 - "GET /api/map HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -70,7 +71,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 143, in public_get_map
+  File "/home/workspace/main.py", line 191, in public_get_map
     doc = db["mapasset"].find_one(sort=[("version", -1)]) if db else None
                                                              ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -78,7 +79,7 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:41834 - "GET /api/map HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:49956 - "GET /api/map HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -143,7 +144,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 143, in public_get_map
+  File "/home/workspace/main.py", line 191, in public_get_map
     doc = db["mapasset"].find_one(sort=[("version", -1)]) if db else None
                                                              ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -151,9 +152,9 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:41848 - "GET /api/pois HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41848 - "GET /api/pois HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41852 - "GET /api/map HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:49958 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:49958 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:49972 - "GET /api/map HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -218,7 +219,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 143, in public_get_map
+  File "/home/workspace/main.py", line 191, in public_get_map
     doc = db["mapasset"].find_one(sort=[("version", -1)]) if db else None
                                                              ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -226,7 +227,7 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:44014 - "GET /api/map HTTP/1.1" 500 Internal Server Error
+INFO:     172.20.0.1:39064 - "GET /api/map HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/usr/local/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 408, in run_asgi
@@ -291,7 +292,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^
   File "/usr/local/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 807, in run
     result = context.run(func, *args)
-  File "/home/workspace/main.py", line 143, in public_get_map
+  File "/home/workspace/main.py", line 191, in public_get_map
     doc = db["mapasset"].find_one(sort=[("version", -1)]) if db else None
                                                              ^^
   File "/usr/local/lib/python3.13/site-packages/pymongo/database.py", line 1337, in __bool__
@@ -299,5 +300,5 @@ Traceback (most recent call last):
     ...<3 lines>...
     )
 NotImplementedError: Database objects do not implement truth value testing or bool(). Please compare with None instead: database is not None
-INFO:     172.20.0.1:44022 - "GET /api/pois HTTP/1.1" 200 OK
-INFO:     172.20.0.1:44022 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39066 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39066 - "GET /api/pois HTTP/1.1" 200 OK
