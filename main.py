@@ -137,6 +137,13 @@ def search_lore(q: str):
     ]
 
 
+# Public map endpoint (no auth) so the website can load the current map image
+@app.get("/api/map")
+def public_get_map():
+    doc = db["mapasset"].find_one(sort=[("version", -1)]) if db else None
+    return doc_to_public(doc) if doc else None
+
+
 # --------------------- Admin endpoints ---------------------
 
 @app.post("/api/admin/login", response_model=AuthResponse)
