@@ -1,7 +1,15 @@
 INFO:     Will watch for changes in these directories: ['/home/workspace']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [113] using StatReload
-INFO:     Started server process [115]
+INFO:     Started reloader process [187] using StatReload
+INFO:     Started server process [189]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     172.20.0.1:52698 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:34436 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:34442 - "GET /api/admin/map?token=public HTTP/1.1" 401 Unauthorized
+INFO:     172.20.0.1:34458 - "GET /api/admin/map?token=public HTTP/1.1" 401 Unauthorized
+INFO:     172.20.0.1:34442 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34442 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47558 - "GET /api/admin/map?token=public HTTP/1.1" 401 Unauthorized
+INFO:     172.20.0.1:47562 - "GET /api/admin/map?token=public HTTP/1.1" 401 Unauthorized
+INFO:     172.20.0.1:47562 - "GET /api/pois HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47562 - "GET /api/pois HTTP/1.1" 200 OK

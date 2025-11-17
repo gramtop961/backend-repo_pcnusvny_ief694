@@ -1,48 +1,38 @@
 """
-Database Schemas
+Database Schemas for Interactive World Map & Lore Wiki
 
-Define your MongoDB collection schemas here using Pydantic models.
-These schemas are used for data validation in your application.
-
-Each Pydantic model represents a collection in your database.
-Model name is converted to lowercase for the collection name:
-- User -> "user" collection
-- Product -> "product" collection
-- BlogPost -> "blogs" collection
+Each Pydantic model corresponds to a MongoDB collection with the collection
+name equal to the lowercase class name (e.g., LoreArticle -> "lorearticle").
 """
-
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
-# Example schemas (replace with your own):
 
-class User(BaseModel):
-    """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
-    """
-    name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
-    age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
-    is_active: bool = Field(True, description="Whether user is active")
+class Category(BaseModel):
+    name: str = Field(..., description="Category display name")
+    slug: str = Field(..., description="URL-friendly unique slug")
+    description: Optional[str] = Field(None, description="Short description of this category")
 
-class Product(BaseModel):
-    """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
-    """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
+class LoreArticle(BaseModel):
+    title: str = Field(..., description="Article title")
+    short_description: str = Field(..., description="Short teaser/summary")
+    main_image_url: Optional[str] = Field(None, description="Primary image URL")
+    content_body: str = Field(..., description="HTML content for WYSIWYG output")
+    category_ids: List[str] = Field(default_factory=list, description="List of linked Category IDs (as strings)")
+    slug: Optional[str] = Field(default=None, description="Optional URL slug")
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+
+class POI(BaseModel):
+    name: str = Field(..., description="Point of Interest name")
+    x_coordinate: float = Field(..., ge=0, le=1, description="X position normalized 0..1 relative to map width")
+    y_coordinate: float = Field(..., ge=0, le=1, description="Y position normalized 0..1 relative to map height")
+    icon_type: str = Field("marker", description="Icon type (city, dungeon, quest, marker...)")
+    lore_article_id: Optional[str] = Field(None, description="Linked LoreArticle ID")
+
+
+class MapAsset(BaseModel):
+    image_url: str = Field(..., description="Public URL to the map image")
+    width: Optional[int] = Field(None, description="Original pixel width")
+    height: Optional[int] = Field(None, description="Original pixel height")
+    version: int = Field(1, description="Increment when image replaced")
